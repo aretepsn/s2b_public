@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>S2B 상품 페이지로 이동 중...</title>
+  <script>
+    (function () {
+      // 주소 뒤 ?code=값 을 읽어옴 (예: ?code=202607088995823)
+      var params = new URLSearchParams(window.location.search);
+      var code = (params.get("code") || "").trim();
+
+      // 숫자로만 된 코드일 때만 이동 (엉뚱한 값 방지)
+      if (/^\d+$/.test(code)) {
+        var target = "https://www.s2b.kr/S2BNCustomer/rema100No.do"
+                   + "?forwardName=detail&f_re_estimate_code=" + encodeURIComponent(code);
+        window.location.replace(target);
+      } else {
+        document.addEventListener("DOMContentLoaded", function () {
+          document.getElementById("msg").textContent =
+            "물품번호(code)가 없거나 올바르지 않습니다.";
+        });
+      }
+    })();
+  </script>
+  <style>
+    body { font-family: "Malgun Gothic", sans-serif; text-align: center; padding-top: 80px; color: #333; }
+  </style>
+</head>
+<body>
+  <p id="msg">S2B 상품 페이지로 이동 중입니다...</p>
+</body>
+</html>
